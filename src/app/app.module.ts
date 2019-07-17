@@ -12,6 +12,9 @@ import { SidebarComponent } from './shared/sidebar/sidebar.component';
 import { BreadcrumbsComponent } from './shared/breadcrumbs/breadcrumbs.component';
 import { FooterComponent } from './shared/footer/footer.component';
 
+import { AppRoutingModule } from './app.routes';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,7 +29,8 @@ import { FooterComponent } from './shared/footer/footer.component';
     FooterComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
