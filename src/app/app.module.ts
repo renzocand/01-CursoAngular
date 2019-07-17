@@ -13,6 +13,8 @@ import { BreadcrumbsComponent } from './shared/breadcrumbs/breadcrumbs.component
 import { FooterComponent } from './shared/footer/footer.component';
 
 import { AppRoutingModule } from './app.routes';
+import { PagesComponent } from './pages/pages.component';
+import { RegisterComponent } from './login/register/register.component';
 
 
 @NgModule({
@@ -26,7 +28,9 @@ import { AppRoutingModule } from './app.routes';
     Graficas1Component,
     SidebarComponent,
     BreadcrumbsComponent,
-    FooterComponent
+    FooterComponent,
+    PagesComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
