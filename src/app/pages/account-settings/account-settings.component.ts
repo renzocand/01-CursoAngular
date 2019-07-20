@@ -1,43 +1,44 @@
-import { Component, OnInit, Inject, ElementRef } from '@angular/core';
-import { DOCUMENT } from '@angular/common';
+import { Component, OnInit } from "@angular/core";
+import { SettingsService } from "src/app/services/settings.service";
 
 @Component({
-  selector: 'app-account-settings',
-  templateUrl: './account-settings.component.html',
+  selector: "app-account-settings",
+  templateUrl: "./account-settings.component.html",
   styles: []
 })
 export class AccountSettingsComponent implements OnInit {
-
-
-  constructor( @Inject(DOCUMENT) public _document ) { }
+  constructor(private settings: SettingsService) {}
 
   ngOnInit() {
-    const temas = document.getElementById('themecolors')
-
-    temas.addEventListener('click', (e)=>{
-      
-      // console.log(e.target.classList);
-
-      this.aplicarCheck(e.target)
-
-      if(e.target.getAttribute('data-theme') === null){
+    document.getElementById("themecolors").addEventListener("click", e => {
+      const target = e.target as HTMLTextAreaElement;
+      const tema = target.getAttribute("data-theme");
+      if (tema === null) {
         return false;
       }
-      let colorTema = e.target.getAttribute('data-theme')
-      let url = `assets/css/colors/${colorTema}.css`
-
-      this._document.getElementById('theme').setAttribute('href', url)
-    })
+      this.aplicarCheck(target);
+      this.settings.aplicarTema(tema);
+    });
+    this.colocarCheck();
   }
 
- aplicarCheck(link:any){
-  let selector = document.getElementsByClassName('selector')
-  
-  for(let i = 0; i<selector.length; i++){
-    selector[i].classList.remove('working')
+  aplicarCheck(link: HTMLTextAreaElement) {
+    const selectores = document.getElementsByClassName("selector");
+    for (let i = 0; i < selectores.length; i++) {
+      selectores[i].classList.remove("working");
+    }
+    link.classList.add("working");
   }
-  link.classList.add('working')
- }
-  
 
+  colocarCheck() {
+    const selectores = document.getElementsByClassName("selector");
+    const tema = this.settings.ajustes.tema;
+
+    for (let i = 0; i < selectores.length; i++) {
+      if (selectores[i].getAttribute("data-theme") === tema) {
+        selectores[i].classList.add("working");
+        break;
+      }
+    }
+  }
 }

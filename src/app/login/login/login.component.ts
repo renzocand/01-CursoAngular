@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
-declare var $:any;
+declare function initPlugin();
 
 @Component({
   selector: 'app-login',
@@ -9,22 +10,16 @@ declare var $:any;
 })
 export class LoginComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router:Router) { 
+  }
 
   ngOnInit() {
-    $(function() {
-      $(".preloader").fadeOut();
-  });
-  $(function() {
-      $('[data-toggle="tooltip"]').tooltip()
-  });
-  // ============================================================== 
-  // Login and Recover Password 
-  // ============================================================== 
-  $('#to-recover').on("click", function() {
-      $("#loginform").slideUp();
-      $("#recoverform").fadeIn();
-  });
+    initPlugin()
+  }
+
+  ingresar(){
+    // console.log('ingreso');
+    this.router.navigateByUrl('dashboard')
   }
 
 }
